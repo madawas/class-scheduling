@@ -1,0 +1,6 @@
+# Application related configurations
+mutationRate: 0.01
+crossoverRate: 0.9
+initialPopulationSize: 100
+elitismCount: 2
+tournamentCount: 5

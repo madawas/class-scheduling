@@ -2,7 +2,7 @@ package org.iit.genetics.main;
 
 import org.iit.genetics.algorithm.Algorithm;
 import org.iit.genetics.algorithm.Population;
-import org.iit.genetics.bean.Class;
+import org.iit.genetics.bean.ScheduledClass;
 import org.iit.genetics.bean.Timetable;
 
 import java.util.Arrays;
@@ -48,18 +48,18 @@ public class TimetableGA {
                 getFitness());
         System.out.println("Clashes: " + timetable.calcClashes());
 
-        // Print classes
+        // Print scheduledClasses
         System.out.println();
-        Class[] classes = timetable.getClasses();
+        ScheduledClass[] scheduledClasses = timetable.getScheduledClasses();
         int classIndex = 1;
 
-        for (Class bestClass : classes) {
-            System.out.println("Class " + classIndex + ":");
-            System.out.println("Module: " + bestClass.getModule().getModuleName());
-            System.out.println("Batch: " + bestClass.getBatch().getId());
-            System.out.println("Room: " + bestClass.getRoom().getNumber());
-            System.out.println("Professor: " + bestClass.getProfessor().getName());
-            System.out.println("Time: " + bestClass.getTimeSlot().getTimeSlot());
+        for (ScheduledClass bestScheduledClass : scheduledClasses) {
+            System.out.println("ScheduledClass " + classIndex + ":");
+            System.out.println("Module: " + bestScheduledClass.getModule().getModuleName());
+            System.out.println("Batch: " + bestScheduledClass.getBatch().getId());
+            System.out.println("Classroom: " + bestScheduledClass.getClassroom().getNumber());
+            System.out.println("Professor: " + bestScheduledClass.getProfessor().getName());
+            System.out.println("Time: " + bestScheduledClass.getTimeSlot().getDay() + " " + bestScheduledClass.getTimeSlot().getSlotIndex());
             System.out.println("-----");
             classIndex++;
         }
@@ -75,22 +75,13 @@ public class TimetableGA {
         timetable.addRoom(4, "D1", 20);
         timetable.addRoom(5, "F1", 25);
 
-        // Set up timeslots
-        timetable.addTimeSlot(1, "Mon 9:00 - 11:00");
-        timetable.addTimeSlot(2, "Mon 11:00 - 13:00");
-        timetable.addTimeSlot(3, "Mon 13:00 - 15:00");
-        timetable.addTimeSlot(4, "Tue 9:00 - 11:00");
-        timetable.addTimeSlot(5, "Tue 11:00 - 13:00");
-        timetable.addTimeSlot(6, "Tue 13:00 - 15:00");
-        timetable.addTimeSlot(7, "Wed 9:00 - 11:00");
-        timetable.addTimeSlot(8, "Wed 11:00 - 13:00");
-        timetable.addTimeSlot(9, "Wed 13:00 - 15:00");
-        timetable.addTimeSlot(10, "Thu 9:00 - 11:00");
-        timetable.addTimeSlot(11, "Thu 11:00 - 13:00");
-        timetable.addTimeSlot(12, "Thu 13:00 - 15:00");
-        timetable.addTimeSlot(13, "Fri 9:00 - 11:00");
-        timetable.addTimeSlot(14, "Fri 11:00 - 13:00");
-        timetable.addTimeSlot(15, "Fri 13:00 - 15:00");
+        int id = 1;
+        for (int day = 1; day <= 5; day++) {
+            for (int slotIndex = 1; slotIndex <= 8; ++slotIndex) {
+                timetable.addTimeSlot(id, day, slotIndex);
+                ++id;
+            }
+        }
         // Set up professors
         timetable.addProfessor(1, "Dr P Smith");
         timetable.addProfessor(2, "Mrs E Mitchell");

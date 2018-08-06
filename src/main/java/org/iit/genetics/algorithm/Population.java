@@ -10,11 +10,11 @@ public class Population {
     private List<Individual> population;
     private double populationFitness = -1;
 
-    public Population(int populationSize) {
+    Population(int populationSize) {
         this.population = new ArrayList<>();
     }
 
-    public Population(int populationSize, Timetable timetable) {
+    Population(int populationSize, Timetable timetable) {
         this.population = new ArrayList<>();
 
         for (int i = 0; i < populationSize; i++) {
@@ -23,17 +23,17 @@ public class Population {
         }
     }
 
-    public List<Individual> getIndividuals() {
+    List<Individual> getIndividuals() {
         return this.population;
     }
 
     public Individual getFittest(int offset) {
-        Collections.sort(this.population, (i1, i2) -> Double.compare(i2.getFitness(), i1.getFitness()));
+        this.population.sort((i1, i2) -> Double.compare(i2.getFitness(), i1.getFitness()));
         return this.population.get(offset);
     }
 
 
-    public void setPopulationFitness(double fitness) {
+    void setPopulationFitness(double fitness) {
         this.populationFitness = fitness;
     }
 
@@ -41,19 +41,19 @@ public class Population {
         return this.populationFitness;
     }
 
-    public int size() {
+    int size() {
         return this.population.size();
     }
 
-    public void setIndividual(int offset, Individual individual) {
+    void setIndividual(int offset, Individual individual) {
         this.population.add(offset, individual);
     }
 
-    public Individual getIndividual(int offset) {
+    Individual getIndividual(int offset) {
         return population.get(offset);
     }
 
-    public void shuffle() {
+    void shuffle() {
         Collections.shuffle(this.population);
     }
 }

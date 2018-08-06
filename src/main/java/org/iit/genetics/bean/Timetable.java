@@ -6,12 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Timetable {
-    private final HashMap<Integer, Room> rooms;
+    private final HashMap<Integer, Classroom> rooms;
     private final HashMap<Integer, Professor> professors;
     private final HashMap<Integer, Module> modules;
     private final HashMap<Integer, Batch> batches;
     private final HashMap<Integer, TimeSlot> timeSlots;
-    private org.iit.genetics.bean.Class[] classes;
+    private ScheduledClass[] scheduledClasses;
 
     private int numClasses = 0;
 
@@ -48,7 +48,7 @@ public class Timetable {
     }
 
     public void addRoom(int roomId, String roomName, int capacity) {
-        this.rooms.put(roomId, new Room(roomId, roomName, capacity));
+        this.rooms.put(roomId, new Classroom(roomId, roomName, capacity));
     }
 
     public void addProfessor(int professorId, String professorName) {
@@ -64,13 +64,13 @@ public class Timetable {
         this.numClasses = 0;
     }
 
-    public void addTimeSlot(int timeSlotId, String timeSlot) {
-        this.timeSlots.put(timeSlotId, new TimeSlot(timeSlotId, timeSlot));
+    public void addTimeSlot(int timeSlotId, int day, int slotIndex) {
+        this.timeSlots.put(timeSlotId, new TimeSlot(timeSlotId, day, slotIndex));
     }
 
     public void createClasses(Individual individual) {
-        // Init classes
-        org.iit.genetics.bean.Class[] classes = new org.iit.genetics.bean.Class[this.getNumClasses()];
+        // Init scheduledClasses
+        ScheduledClass[] scheduledClasses = new ScheduledClass[this.getNumClasses()];
         // Get individual's chromosome
         int[] chromosome = individual.getChromosome();
         int chromosomePos = 0;
@@ -79,41 +79,41 @@ public class Timetable {
         for (Batch batch : this.getGroupsAsArray()) {
             List<Module> modules = batch.getModules();
             for (Module module: modules) {
-                classes[classIndex] = new org.iit.genetics.bean.Class(classIndex, batch, module);
+                scheduledClasses[classIndex] = new ScheduledClass(classIndex, batch, module);
 
                 // Add timeSlot
-                classes[classIndex].setTimeSlot(getTimeSlot(chromosome[chromosomePos]));
+                scheduledClasses[classIndex].setTimeSlot(getTimeSlot(chromosome[chromosomePos]));
                 chromosomePos++;
 
                 // Add room
-                classes[classIndex].setRoom(getRoom(chromosome[chromosomePos]));
+                scheduledClasses[classIndex].setClassroom(getRoom(chromosome[chromosomePos]));
                 chromosomePos++;
 
                 // Add professor
-                classes[classIndex].setProfessor(getProfessor(chromosome[chromosomePos]));
+                scheduledClasses[classIndex].setProfessor(getProfessor(chromosome[chromosomePos]));
                 chromosomePos++;
 
                 classIndex++;
             }
         }
-        this.classes = classes;
+        this.scheduledClasses = scheduledClasses;
     }
 
-    public Room getRoom(int roomId) {
+    public Classroom getRoom(int roomId) {
         if (!this.rooms.containsKey(roomId)) {
             System.out.println("Rooms doesn't contain key " + roomId);
         }
-        return (Room) this.rooms.get(roomId);
+        return (Classroom) this.rooms.get(roomId);
     }
 
-    public HashMap<Integer, Room> getRooms() {
+    public HashMap<Integer, Classroom> getRooms() {
         return this.rooms;
     }
 
-    public Room getRandomRoom() {
+    public Classroom getRandomRoom() {
         Object[] roomsArray = this.rooms.values().toArray();
-        Room room = (Room) roomsArray[(int) (roomsArray.length * Math.random())];
-        return room;
+        Classroom classroom = (Classroom) roomsArray[(int) (roomsArray.length * Math.random())];
+        return classroom;
     }
 
     public Professor getProfessor(int professorId) {
@@ -146,8 +146,8 @@ public class Timetable {
         return (TimeSlot) timeSlotArray[(int) (timeSlotArray.length * Math.random())];
     }
 
-    public org.iit.genetics.bean.Class[] getClasses() {
-        return this.classes;
+    public ScheduledClass[] getScheduledClasses() {
+        return this.scheduledClasses;
     }
 
     public int getNumClasses() {
@@ -165,28 +165,29 @@ public class Timetable {
 
     public int calcClashes() {
         int clashes = 0;
-        for (org.iit.genetics.bean.Class classA : this.classes) {
+        for (ScheduledClass scheduledClassA : this.scheduledClasses) {
             // Check room capacity
-            int roomCapacity = classA.getRoom().getRoomCapacity();
-            int batchSize = classA.getBatch().getSize();
+            int roomCapacity = scheduledClassA.getClassroom().getClassroomCapacity();
+            int batchSize = scheduledClassA.getBatch().getSize();
             if (roomCapacity < batchSize) {
                 clashes++;
             }
 
             // Check if room is taken
-            for (org.iit.genetics.bean.Class classB : this.classes) {
-                if (classA.getRoom() == classB.getRoom() && classA.getTimeSlot() == classB.
-                        getTimeSlot() && classA.getId() != classB.getId()) {
+            for (ScheduledClass scheduledClassB : this.scheduledClasses) {
+                if (scheduledClassA.getClassroom() == scheduledClassB.getClassroom() && scheduledClassA.getTimeSlot() == scheduledClassB
+                        .
+                        getTimeSlot() && scheduledClassA.getId() != scheduledClassB.getId()) {
                     clashes++;
                     break;
                 }
             }
 
             // Check if professor is available
-            for (org.iit.genetics.bean.Class classB : this.classes) {
-                if (classA.getProfessor() == classB.
-                        getProfessor() && classA.getTimeSlot() == classB.getTimeSlot()
-                        && classA.getId() != classB.getId()) {
+            for (ScheduledClass scheduledClassB : this.scheduledClasses) {
+                if (scheduledClassA.getProfessor() == scheduledClassB.
+                        getProfessor() && scheduledClassA.getTimeSlot() == scheduledClassB.getTimeSlot()
+                        && scheduledClassA.getId() != scheduledClassB.getId()) {
                     clashes++;
                     break;
                 }

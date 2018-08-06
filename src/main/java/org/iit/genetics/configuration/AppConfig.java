@@ -9,6 +9,7 @@ public class AppConfig {
     private Integer initialPopulationSize;
     private Integer elitismCount;
     private Integer tournamentCount;
+    private Integer maxGenerations;
 
     public Double getMutationRate() {
         return mutationRate;
@@ -48,5 +49,13 @@ public class AppConfig {
 
     public void setTournamentCount(Integer tournamentCount) {
         this.tournamentCount = tournamentCount;
+    }
+
+    public Integer getMaxGenerations() {
+        return maxGenerations;
+    }
+
+    public void setMaxGenerations(Integer maxGenerations) {
+        this.maxGenerations = maxGenerations;
     }
 }

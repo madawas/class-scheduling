@@ -8,7 +8,7 @@ public class Individual {
     private int[] chromosome;
     private double fitness = -1;
 
-    public Individual(Timetable timetable) {
+    Individual(Timetable timetable) {
         int numClasses = timetable.getNumClasses();
 
         // 1 gene for room, 1 for time, 1 for professor
@@ -40,7 +40,7 @@ public class Individual {
         this.chromosome = newChromosome;
     }
 
-    public Individual(int chromosomeLength) {
+    Individual(int chromosomeLength) {
         this.chromosome = new int[chromosomeLength];
         for (int gene = 0; gene < chromosomeLength; gene++) {
             if (0.5 < Math.random()) {
@@ -56,19 +56,19 @@ public class Individual {
         return this.chromosome;
     }
 
-    public int getChromosomeLength() {
+    int getChromosomeLength() {
         return this.chromosome.length;
     }
 
-    public void setGene(int offset, int gene) {
+    void setGene(int offset, int gene) {
         this.chromosome[offset] = gene;
     }
 
-    public int getGene(int offset) {
+    int getGene(int offset) {
         return this.chromosome[offset];
     }
 
-    public void setFitness(double fitness) {
+    void setFitness(double fitness) {
         this.fitness = fitness;
     }
 
@@ -77,10 +77,10 @@ public class Individual {
     }
 
     public String toString() {
-        String output = "";
-        for (int gene = 0; gene < this.chromosome.length; gene++) {
-            output += this.chromosome[gene];
+        StringBuilder output = new StringBuilder();
+        for (int chromosome : this.chromosome) {
+            output.append(chromosome);
         }
-        return output;
+        return output.toString();
     }
 }

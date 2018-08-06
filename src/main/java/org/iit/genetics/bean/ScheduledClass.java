@@ -1,17 +1,17 @@
 package org.iit.genetics.bean;
 
 /**
- * The class {@link Class} represents a class/course that needs to be scheduled.
+ * The class {@link ScheduledClass} represents a class/course that needs to be scheduled.
  */
-public class Class {
+public class ScheduledClass {
     private final int id;
     private final Batch batch;
     private final Module module;
     private Professor professor;
     private TimeSlot timeSlot;
-    private Room room;
+    private Classroom classroom;
 
-    public Class(int id, Batch batch, Module module) {
+    public ScheduledClass(int id, Batch batch, Module module) {
         this.id = id;
         this.module = module;
         this.batch = batch;
@@ -45,11 +45,11 @@ public class Class {
         this.timeSlot = timeSlot;
     }
 
-    public Room getRoom() {
-        return room;
+    public Classroom getClassroom() {
+        return classroom;
     }
 
-    public void setRoom(Room room) {
-        this.room = room;
+    public void setClassroom(Classroom classroom) {
+        this.classroom = classroom;
     }
 }

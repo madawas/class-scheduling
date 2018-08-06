@@ -4,3 +4,4 @@ crossoverRate: 0.9
 initialPopulationSize: 100
 elitismCount: 2
 tournamentCount: 5
+maxGenerations: 1000

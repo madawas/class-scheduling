@@ -5,24 +5,24 @@ package org.iit.genetics.bean;
  */
 public class ScheduledClass {
     private final int id;
-    private final Batch batch;
+    private final StudentGroup studentGroup;
     private final Module module;
     private Professor professor;
     private TimeSlot timeSlot;
     private Classroom classroom;
 
-    public ScheduledClass(int id, Batch batch, Module module) {
+    public ScheduledClass(int id, StudentGroup studentGroup, Module module) {
         this.id = id;
         this.module = module;
-        this.batch = batch;
+        this.studentGroup = studentGroup;
     }
 
     public int getId() {
         return id;
     }
 
-    public Batch getBatch() {
-        return batch;
+    public StudentGroup getStudentGroup() {
+        return studentGroup;
     }
 
     public Module getModule() {

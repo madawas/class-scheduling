@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 
 public class ConfigurationManager {
     private static AppConfig appConfig;
+    private static AppData appData;
 
     private static void readAppConfiguration(String configPath) {
         Yaml yaml = new Yaml();
@@ -34,5 +35,28 @@ public class ConfigurationManager {
         }
 
         return appConfig;
+    }
+
+    public static AppData getAppData(String configPath) {
+        if (appData == null) {
+            readApplicationData(configPath);
+            appData.setResourceIds();
+        }
+
+        return appData;
+    }
+
+    private static void readApplicationData(String configPath) {
+        Yaml yaml = new Yaml();
+
+        try (InputStream in = Files.newInputStream(Paths.get(configPath))) {
+            appData = yaml.loadAs(in, AppData.class);
+        } catch (IOException e) {
+            //            JOptionPane.showMessageDialog(new JFrame(),
+            //                    "Error occurred when reading the config file.", "Dialog",
+            //                    JOptionPane.ERROR_MESSAGE);
+            System.exit(-1);
+        }
+
     }
 }

@@ -1,33 +1,33 @@
 package org.iit.genetics.algorithm;
 
-import org.iit.genetics.bean.Batch;
+import org.iit.genetics.bean.StudentGroup;
 import org.iit.genetics.bean.Module;
-import org.iit.genetics.bean.Timetable;
+import org.iit.genetics.main.ApplicationDataHolder;
 
 public class Individual {
     private int[] chromosome;
     private double fitness = -1;
 
-    Individual(Timetable timetable) {
-        int numClasses = timetable.getNumClasses();
+    Individual(ApplicationDataHolder applicationDataHolder) {
+        int numClasses = applicationDataHolder.getClassesToSchedule();
 
         // 1 gene for room, 1 for time, 1 for professor
         int chromosomeLength = numClasses * 3;
         // Create random individual
-        int newChromosome[] = new int[chromosomeLength];
+        int[] newChromosome = new int[chromosomeLength];
         int chromosomeIndex = 0;
         // Loop through groups
-        for (Batch batch : timetable.getGroupsAsArray()) {
+        for (StudentGroup studentGroup : applicationDataHolder.getAppData().getStudentGroups()) {
             // Loop through modules
-            for (Module module : batch.getModules()) {
+            for (Module module : studentGroup.getEnrollments()) {
                 // Add random time
-                int timeSlotId = timetable.getRandomTimeslot().
+                int timeSlotId = applicationDataHolder.getRandomTimeSlot().
                         getId();
                 newChromosome[chromosomeIndex] = timeSlotId;
                 chromosomeIndex++;
 
                 // Add random room
-                int roomId = timetable.getRandomRoom().getId();
+                int roomId = applicationDataHolder.getRandomClassroom().getId();
                 newChromosome[chromosomeIndex] = roomId;
                 chromosomeIndex++;
 
@@ -42,7 +42,7 @@ public class Individual {
 
     Individual(int chromosomeLength) {
         this.chromosome = new int[chromosomeLength];
-        for (int gene = 0; gene < chromosomeLength; gene++) {
+        for (int gene = 0; gene < chromosomeLength; ++gene) {
             if (0.5 < Math.random()) {
                 this.setGene(gene, 1);
             } else {

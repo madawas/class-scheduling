@@ -1,6 +1,6 @@
 package org.iit.genetics.algorithm;
 
-import org.iit.genetics.bean.Timetable;
+import org.iit.genetics.main.ApplicationDataHolder;
 
 public class Algorithm {
     private int populationSize;
@@ -18,30 +18,30 @@ public class Algorithm {
         this.tournamentSize = tournamentSize;
     }
 
-    public Population initPopulation(Timetable timetable) {
-        return new Population(this.populationSize, timetable);
+    public Population initPopulation(ApplicationDataHolder applicationDataHolder) {
+        return new Population(this.populationSize, applicationDataHolder);
     }
 
-    private double calcFitness(Individual individual, Timetable timetable) {
+    private double calcFitness(Individual individual, ApplicationDataHolder applicationDataHolder) {
 
-        // Create new timetable object to use -- cloned from an existing timetable
-        Timetable threadTimetable = new Timetable(timetable);
-        threadTimetable.createClasses(individual);
+        // Create new applicationDataHolder object to use -- cloned from an existing applicationDataHolder
+        ApplicationDataHolder threadApplicationDataHolder = new ApplicationDataHolder(applicationDataHolder);
+        threadApplicationDataHolder.createClasses(individual);
 
         // Calculate fitness
-        int clashes = threadTimetable.calcClashes();
+        int clashes = threadApplicationDataHolder.calcClashes();
         double fitness = 1 / (double) (clashes + 1);
         individual.setFitness(fitness);
         return fitness;
     }
 
-    public void evalPopulation(Population population, Timetable timetable) {
+    public void evalPopulation(Population population, ApplicationDataHolder applicationDataHolder) {
         double populationFitness = 0;
 
         // Loop over population evaluating individuals and summing population
         // fitness
         for (Individual individual : population.getIndividuals()) {
-            populationFitness += this.calcFitness(individual, timetable);
+            populationFitness += this.calcFitness(individual, applicationDataHolder);
         }
 
         population.setPopulationFitness(populationFitness);
@@ -108,7 +108,7 @@ public class Algorithm {
         return newPopulation;
     }
 
-    public Population mutatePopulation(Population population, Timetable timetable) {
+    public Population mutatePopulation(Population population, ApplicationDataHolder applicationDataHolder) {
         // Initialize new population
         Population newPopulation = new Population(this.populationSize);
 
@@ -118,7 +118,7 @@ public class Algorithm {
                     getFittest(populationIndex);
 
             // Create random individual to swap genes with
-            Individual randomIndividual = new Individual(timetable);
+            Individual randomIndividual = new Individual(applicationDataHolder);
 
             // Loop over individual's genes
             for (int geneIndex = 0; geneIndex < individual.

@@ -3,22 +3,32 @@ package org.iit.genetics.bean;
 import java.util.List;
 
 public class Module {
-    private final int id;
-    private final String name;
-    private final List<Professor> professors;
-
-    public Module(int id, String name, List<Professor> professors) {
-        this.id = id;
-        this.name = name;
-        this.professors = professors;
-    }
+    private int id;
+    private String name;
+    private List<Professor> professors;
 
     public int getId() {
-        return this.id;
+        return id;
     }
 
-    public String getModuleName() {
-        return this.name;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Professor> getProfessors() {
+        return professors;
+    }
+
+    public void setProfessors(List<Professor> professors) {
+        this.professors = professors;
     }
 
     public Professor getRandomProfessor() {

@@ -1,0 +1,112 @@
+---
+classrooms:
+  -
+    number: "A1"
+    capacity: 15
+  -
+    number: "B1"
+    capacity: 30
+  -
+    number: "D1"
+    capacity: 20
+  -
+    number: "F1"
+    capacity: 25
+
+professors:
+  - &professor1
+    name: 'Dr. P Smith'
+  - &professor2
+    name: 'Mrs. E Mitchell'
+  - &professor3
+    name: 'Dr. R Williams'
+  - &professor4
+    name: 'Mr. A Thompson'
+
+modules:
+  - &module1
+    name: "Computer Science"
+    professors:
+      - *professor1
+      - *professor3
+  - &module2
+    name: "English"
+    professors:
+      - *professor2
+      - *professor3
+  - &module3
+    name: "Maths"
+    professors:
+      - *professor1
+      - *professor2
+  - &module4
+    name: "Physics"
+    professors:
+      - *professor3
+      - *professor4
+  - &module5
+    name: "History"
+    professors:
+      - *professor4
+  - &module6
+    name: "Drama"
+    professors:
+      - *professor1
+      - *professor4
+
+studentGroups:
+  -
+    size: 10
+    enrollments:
+      - *module1
+      - *module3
+      - *module4
+  -
+    size: 30
+    enrollments:
+      - *module2
+      - *module3
+      - *module5
+  -
+    size: 18
+    enrollments:
+      - *module3
+      - *module4
+      - *module5
+  -
+    size: 25
+    enrollments:
+      - *module1
+      - *module4
+  -
+    size: 20
+    enrollments:
+      - *module2
+      - *module3
+      - *module5
+  -
+    size: 22
+    enrollments:
+      - *module1
+      - *module5
+      - *module4
+  -
+    size: 16
+    enrollments:
+      - *module1
+      - *module3
+  -
+    size: 18
+    enrollments:
+      - *module2
+      - *module6
+  -
+    size: 24
+    enrollments:
+      - *module1
+      - *module6
+  -
+    size: 25
+    enrollments:
+      - *module4
+      - *module3

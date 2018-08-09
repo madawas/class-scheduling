@@ -28,11 +28,11 @@ modules:
     name: "Computer Science"
     professors:
       - *professor1
-      - *professor3
+      - *professor2
   - &module2
     name: "English"
     professors:
-      - *professor2
+      - *professor1
       - *professor3
   - &module3
     name: "Maths"

@@ -56,18 +56,21 @@ public class AppData {
 
         for (Professor professor: this.professors) {
             professor.setId(id);
+            ++id;
         }
 
         id = 1;
 
         for (Module module: this.modules) {
             module.setId(id);
+            ++id;
         }
 
         id = 1;
 
         for (StudentGroup studentGroup : this.studentGroups) {
             studentGroup.setId(id);
+            ++id;
         }
     }
 

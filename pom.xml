@@ -4,34 +4,34 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <id>org.iit.genetics</id>
+    <groupId>org.iit.genetics</groupId>
     <artifactId>class-scheduling</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
-            <id>org.apache.commons</id>
+            <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.5</version>
         </dependency>
         <dependency>
-            <id>org.apache.commons</id>
+            <groupId>org.apache.commons</groupId>
             <artifactId>commons-csv</artifactId>
             <version>1.4</version>
         </dependency>
         <dependency>
-            <id>log4j</id>
+            <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
         <dependency>
-            <id>org.yaml</id>
+            <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
             <version>1.18</version>
         </dependency>
         <dependency>
-            <id>com.intellij</id>
+            <groupId>com.intellij</groupId>
             <artifactId>forms_rt</artifactId>
             <version>7.0.3</version>
         </dependency>
@@ -49,7 +49,7 @@
         </resources>
         <plugins>
             <plugin>
-                <id>org.apache.maven.plugins</id>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <source>1.8</source>

@@ -1,13 +1,17 @@
 package org.iit.genetics.configuration;
 
+import org.apache.log4j.Logger;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class ConfigurationManager {
+    private static final Logger log = Logger.getLogger(ConfigurationManager.class);
     private static AppConfig appConfig;
     private static AppData appData;
 
@@ -16,11 +20,12 @@ public class ConfigurationManager {
         try (InputStream in = Files.newInputStream(Paths.get(configPath))) {
             appConfig = yaml.loadAs(in, AppConfig.class);
         } catch (IOException e) {
-//            JOptionPane.showMessageDialog(new JFrame(),
-//                    "Error occurred when reading the config file.", "Dialog",
-//                    JOptionPane.ERROR_MESSAGE);
+            log.error("Error occurred when reading the config file.");
+            JOptionPane.showMessageDialog(new JFrame(), "Error occurred when reading the config file.", "Dialog",
+                    JOptionPane.ERROR_MESSAGE);
             System.exit(-1);
         }
+        log.info("Successfully read the application configurations");
     }
 
     /**
@@ -52,11 +57,11 @@ public class ConfigurationManager {
         try (InputStream in = Files.newInputStream(Paths.get(configPath))) {
             appData = yaml.loadAs(in, AppData.class);
         } catch (IOException e) {
-            //            JOptionPane.showMessageDialog(new JFrame(),
-            //                    "Error occurred when reading the config file.", "Dialog",
-            //                    JOptionPane.ERROR_MESSAGE);
+            log.error("Error occurred when reading the data file.");
+            JOptionPane.showMessageDialog(new JFrame(), "Error occurred when reading the data file.", "Dialog",
+                    JOptionPane.ERROR_MESSAGE);
             System.exit(-1);
         }
-
+        log.info("Successfully read the application configurations");
     }
 }

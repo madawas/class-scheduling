@@ -17,12 +17,10 @@ import java.awt.Dimension;
 import java.awt.Insets;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.WindowConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.DefaultCaret;
@@ -41,7 +39,7 @@ public class ClassSchedulerUI {
     private AppConfig appConfig;
     private AppData appData;
 
-    public ClassSchedulerUI() {
+    private ClassSchedulerUI() {
         initComponents();
         this.appConfig = ConfigurationManager.getAppConfiguration(CommonConstants.DEFAULT_CONFIG_PATH);
         this.appData = ConfigurationManager.getAppData(CommonConstants.DEFAULT_DATA_PATH);
@@ -111,7 +109,6 @@ public class ClassSchedulerUI {
         console.setTabSize(4);
         textAreaScrollPane.setViewportView(console);
         console.setEditable(false);
-//        console.setLineWrap(true);
         createLogAppender(this.console);
         DefaultCaret caret = (DefaultCaret)console.getCaret();
         caret.setUpdatePolicy(DefaultCaret.OUT_BOTTOM);

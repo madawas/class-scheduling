@@ -62,6 +62,6 @@ public class ConfigurationManager {
                     JOptionPane.ERROR_MESSAGE);
             System.exit(-1);
         }
-        log.info("Successfully read the application configurations");
+        log.info("Successfully read the data file and generated objects.");
     }
 }

@@ -32,12 +32,13 @@ public class LogAppender extends AppenderSkeleton {
         DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         if (event.locationInformationExists()) {
             StringBuilder message = new StringBuilder();
+            String className = event.getLogger().getName();
             message.append("\n");
             message.append(dFormat.format(new Date(event.getTimeStamp())));
             message.append("  ");
             message.append(event.getLevel());
             message.append(" ");
-            message.append(event.getLoggerName());
+            message.append(className.substring(className.lastIndexOf('.') + 1));
             message.append(":");
             message.append(event.getLocationInformation().getLineNumber());
             message.append(" - ");

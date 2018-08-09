@@ -1,6 +1,6 @@
 package org.iit.genetics.algorithm;
 
-import org.iit.genetics.main.ApplicationDataHolder;
+import org.iit.genetics.main.Timetable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,11 +14,11 @@ public class Population {
         this.population = new ArrayList<>();
     }
 
-    Population(int populationSize, ApplicationDataHolder applicationDataHolder) {
+    Population(int populationSize, Timetable timetable) {
         this.population = new ArrayList<>();
 
         for (int i = 0; i < populationSize; i++) {
-            Individual individual = new Individual(applicationDataHolder);
+            Individual individual = new Individual(timetable);
             this.population.add(individual);
         }
     }

@@ -2,14 +2,14 @@ package org.iit.genetics.algorithm;
 
 import org.iit.genetics.bean.StudentGroup;
 import org.iit.genetics.bean.Module;
-import org.iit.genetics.main.ApplicationDataHolder;
+import org.iit.genetics.main.Timetable;
 
 public class Individual {
     private int[] chromosome;
     private double fitness = -1;
 
-    Individual(ApplicationDataHolder applicationDataHolder) {
-        int numClasses = applicationDataHolder.getClassesToSchedule();
+    Individual(Timetable timetable) {
+        int numClasses = timetable.getClassesToSchedule();
 
         // 1 gene for room, 1 for time, 1 for professor
         int chromosomeLength = numClasses * 3;
@@ -17,17 +17,17 @@ public class Individual {
         int[] newChromosome = new int[chromosomeLength];
         int chromosomeIndex = 0;
         // Loop through groups
-        for (StudentGroup studentGroup : applicationDataHolder.getAppData().getStudentGroups()) {
+        for (StudentGroup studentGroup : timetable.getAppData().getStudentGroups()) {
             // Loop through modules
             for (Module module : studentGroup.getEnrollments()) {
                 // Add random time
-                int timeSlotId = applicationDataHolder.getRandomTimeSlot().
+                int timeSlotId = timetable.getRandomTimeSlot().
                         getId();
                 newChromosome[chromosomeIndex] = timeSlotId;
                 chromosomeIndex++;
 
                 // Add random room
-                int roomId = applicationDataHolder.getRandomClassroom().getId();
+                int roomId = timetable.getRandomClassroom().getId();
                 newChromosome[chromosomeIndex] = roomId;
                 chromosomeIndex++;
 

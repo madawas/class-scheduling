@@ -8,21 +8,20 @@ import org.iit.genetics.bean.ScheduledClass;
 import org.iit.genetics.bean.StudentGroup;
 import org.iit.genetics.bean.TimeSlot;
 import org.iit.genetics.configuration.AppData;
-import org.iit.genetics.configuration.ConfigurationManager;
 
 import java.util.List;
 
-public class ApplicationDataHolder {
+public class Timetable {
     private AppData appData;
     private ScheduledClass[] scheduledClasses;
     private List<TimeSlot> timeSlots;
     private int classesToSchedule = 0;
 
-    public ApplicationDataHolder(String dataPath) {
-        this.appData = ConfigurationManager.getAppData(dataPath);
+    public Timetable(AppData appData) {
+        this.appData = appData;
     }
 
-    public ApplicationDataHolder(ApplicationDataHolder cloneable) {
+    public Timetable(Timetable cloneable) {
         this.appData = cloneable.getAppData();
         this.timeSlots = cloneable.getTimeSlots();
     }

@@ -1,8 +1,10 @@
 package org.iit.genetics.algorithm;
 
-import org.iit.genetics.main.ApplicationDataHolder;
+import org.apache.log4j.Logger;
+import org.iit.genetics.main.Timetable;
 
 public class Algorithm {
+    private static final Logger log = Logger.getLogger(Algorithm.class);
     private int populationSize;
     private double mutationRate;
     private double crossoverRate;
@@ -18,30 +20,30 @@ public class Algorithm {
         this.tournamentSize = tournamentSize;
     }
 
-    public Population initPopulation(ApplicationDataHolder applicationDataHolder) {
-        return new Population(this.populationSize, applicationDataHolder);
+    public Population initPopulation(Timetable timetable) {
+        return new Population(this.populationSize, timetable);
     }
 
-    private double calcFitness(Individual individual, ApplicationDataHolder applicationDataHolder) {
+    private double calcFitness(Individual individual, Timetable timetable) {
 
-        // Create new applicationDataHolder object to use -- cloned from an existing applicationDataHolder
-        ApplicationDataHolder threadApplicationDataHolder = new ApplicationDataHolder(applicationDataHolder);
-        threadApplicationDataHolder.createClasses(individual);
+        // Create new timetable object to use -- cloned from an existing timetable
+        Timetable threadTimetable = new Timetable(timetable);
+        threadTimetable.createClasses(individual);
 
         // Calculate fitness
-        int clashes = threadApplicationDataHolder.calcClashes();
+        int clashes = threadTimetable.calcClashes();
         double fitness = 1 / (double) (clashes + 1);
         individual.setFitness(fitness);
         return fitness;
     }
 
-    public void evalPopulation(Population population, ApplicationDataHolder applicationDataHolder) {
+    public void evalPopulation(Population population, Timetable timetable) {
         double populationFitness = 0;
 
         // Loop over population evaluating individuals and summing population
         // fitness
         for (Individual individual : population.getIndividuals()) {
-            populationFitness += this.calcFitness(individual, applicationDataHolder);
+            populationFitness += this.calcFitness(individual, timetable);
         }
 
         population.setPopulationFitness(populationFitness);
@@ -108,7 +110,7 @@ public class Algorithm {
         return newPopulation;
     }
 
-    public Population mutatePopulation(Population population, ApplicationDataHolder applicationDataHolder) {
+    public Population mutatePopulation(Population population, Timetable timetable) {
         // Initialize new population
         Population newPopulation = new Population(this.populationSize);
 
@@ -118,7 +120,7 @@ public class Algorithm {
                     getFittest(populationIndex);
 
             // Create random individual to swap genes with
-            Individual randomIndividual = new Individual(applicationDataHolder);
+            Individual randomIndividual = new Individual(timetable);
 
             // Loop over individual's genes
             for (int geneIndex = 0; geneIndex < individual.
@@ -139,5 +141,38 @@ public class Algorithm {
 
         // Return mutated population
         return newPopulation;
+    }
+
+    public void runGA(Timetable timetable, int maxGenerations) {
+        Population population = this.initPopulation(timetable);
+
+        this.evalPopulation(population, timetable);
+
+        // Keep track of current generation
+        int generation = 1;
+
+        // Start evolution loop
+        while (!this.isTerminationConditionMet(generation, maxGenerations) && !this
+                .isTerminationConditionMet(population)) {
+            // Print fitness
+            log.info("Generation: " + generation + ", Best fitness: " + population.getFittest(0).getFitness());
+
+            // Apply crossover
+            population = this.crossoverPopulation(population);
+
+            // Apply mutation
+            population = this.mutatePopulation(population, timetable);
+
+            // Evaluate population
+            this.evalPopulation(population, timetable);
+
+            // Increment the current generation
+            generation++;
+        }
+
+        timetable.createClasses(population.getFittest(0));
+        log.info("Solution found in " + generation + " generations");
+        log.info("Final solution fitness: " + population.getFittest(0).getFitness());
+        log.info("Clashes: " + timetable.calcClashes());
     }
 }

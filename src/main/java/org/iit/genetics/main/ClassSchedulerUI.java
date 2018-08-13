@@ -7,7 +7,6 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.iit.genetics.algorithm.Algorithm;
-import org.iit.genetics.algorithm.Population;
 import org.iit.genetics.bean.TimeSlot;
 import org.iit.genetics.configuration.AppConfig;
 import org.iit.genetics.configuration.AppData;
@@ -21,6 +20,7 @@ import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -46,6 +46,7 @@ public class ClassSchedulerUI {
 
     private AppConfig appConfig;
     private AppData appData;
+    private Timetable timetable;
 
     private ClassSchedulerUI() {
         initComponents();
@@ -59,15 +60,18 @@ public class ClassSchedulerUI {
 
     private void scheduleClassesButtonActionPerformed(ActionEvent e) {
         Timetable timetable = this.initializeTimetable();
+        log.info("Starting to schedule classes");
         Algorithm algorithm = new Algorithm(appConfig.getInitialPopulationSize(), appConfig.getMutationRate(),
                 appConfig.getCrossoverRate(), appConfig.getElitismCount(), appConfig.getTournamentCount());
-        algorithm.runGA(timetable, appConfig.getMaxGenerations());
+        this.timetable = algorithm.runGA(timetable, appConfig.getMaxGenerations());
 
         this.viewTimetableButton.setEnabled(true);
     }
 
     private void viewTimetableButtonActionPerformed(ActionEvent e) {
-
+        FinalTimetableUI finalTimetableUI = new FinalTimetableUI();
+        finalTimetableUI.generateTimetableData(Arrays.asList(timetable.getScheduledClasses()));
+        finalTimetableUI.displayTimetable();
     }
 
     /**

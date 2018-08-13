@@ -7,4 +7,6 @@ public class CommonConstants {
     public static final String DEFAULT_DATA_PATH = "data.yaml";
 
     public static final String DEFAULT_LOG_PROPERTY_PATH = "src/main/resources/log4j.properties";
+
+    public static final String[] TIMETABLE_HEADER = {"", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"};
 }

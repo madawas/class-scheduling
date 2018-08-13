@@ -143,7 +143,7 @@ public class Algorithm {
         return newPopulation;
     }
 
-    public void runGA(Timetable timetable, int maxGenerations) {
+    public Timetable runGA(Timetable timetable, int maxGenerations) {
         Population population = this.initPopulation(timetable);
 
         this.evalPopulation(population, timetable);
@@ -174,5 +174,7 @@ public class Algorithm {
         log.info("Solution found in " + generation + " generations");
         log.info("Final solution fitness: " + population.getFittest(0).getFitness());
         log.info("Clashes: " + timetable.calcClashes());
+
+        return timetable;
     }
 }

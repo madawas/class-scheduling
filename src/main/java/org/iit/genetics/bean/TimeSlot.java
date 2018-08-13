@@ -19,10 +19,6 @@ public class TimeSlot {
         return day;
     }
 
-    public void setDay(byte day) {
-        this.day = day;
-    }
-
     public int getSlotIndex() {
         return slotIndex;
     }

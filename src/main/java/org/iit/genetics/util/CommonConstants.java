@@ -8,5 +8,7 @@ public class CommonConstants {
 
     public static final String DEFAULT_LOG_PROPERTY_PATH = "src/main/resources/log4j.properties";
 
-    public static final String[] TIMETABLE_HEADER = {"", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"};
+    public static final String[] TIMETABLE_HEADER = {"TIME", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"};
+
+    public static final Integer TABLE_ROW_HEIGHT = 250;
 }

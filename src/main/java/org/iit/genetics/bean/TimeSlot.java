@@ -2,24 +2,24 @@ package org.iit.genetics.bean;
 
 public class TimeSlot {
     private final int id;
-    private int day;
-    private int slotIndex;
+    private Weekday weekday;
+    private SlotIndex slotIndex;
 
-    public TimeSlot(int id, int day, int slotIndex){
+    public TimeSlot(int id, int weekday, int slotIndex){
         this.id = id;
-        this.day = day;
-        this.slotIndex = slotIndex;
+        this.weekday = Weekday.findByKey(weekday);
+        this.slotIndex = SlotIndex.findByKey(slotIndex);
     }
 
     public int getId(){
         return this.id;
     }
 
-    public int getDay() {
-        return day;
+    public Weekday getWeekday() {
+        return weekday;
     }
 
-    public int getSlotIndex() {
+    public SlotIndex getSlotIndex() {
         return slotIndex;
     }
 }

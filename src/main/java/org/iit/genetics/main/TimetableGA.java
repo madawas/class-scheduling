@@ -60,7 +60,7 @@ public class TimetableGA {
             System.out.println("StudentGroup: " + bestScheduledClass.getStudentGroup().getId());
             System.out.println("Classroom: " + bestScheduledClass.getClassroom().getNumber());
             System.out.println("Professor: " + bestScheduledClass.getProfessor().getName());
-            System.out.println("Time: " + bestScheduledClass.getTimeSlot().getDay() + " " + bestScheduledClass.getTimeSlot().getSlotIndex());
+            System.out.println("Time: " + bestScheduledClass.getTimeSlot().getWeekday() + " " + bestScheduledClass.getTimeSlot().getSlotIndex());
             System.out.println("-----");
             classIndex++;
         }

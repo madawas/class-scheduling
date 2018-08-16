@@ -158,8 +158,8 @@ public class ClassSchedulerUI {
         List<TimeSlot> timeSlots = new ArrayList<>();
 
         int id = 1;
-        for (int day = 1; day <= 5; ++day) {
-            for (int slot = 1; slot <= 3; ++slot) {
+        for (int day = 1; day < 6; ++day) {
+            for (int slot = 1; slot < 5; ++slot) {
                 timeSlots.add(new TimeSlot(id, day, slot));
                 ++id;
             }

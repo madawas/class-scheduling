@@ -153,17 +153,17 @@ public class ClassSchedulerUI {
     }
 
     private Timetable initializeTimetable() {
-        Timetable timetable = new Timetable(this.appData);
-
+        Timetable timetable = new Timetable(this.appData, this.appConfig);
         List<TimeSlot> timeSlots = new ArrayList<>();
 
         int id = 1;
-        for (int day = 1; day < 6; ++day) {
-            for (int slot = 1; slot < 5; ++slot) {
+        for (int day = 1; day < CommonConstants.TABLE_COLUMNS; ++day) {
+            for (int slot = 1; slot <= CommonConstants.NUMBER_OF_SLOTS_PER_DAY; ++slot) {
                 timeSlots.add(new TimeSlot(id, day, slot));
                 ++id;
             }
         }
+
         timetable.setTimeSlots(timeSlots);
         return timetable;
     }

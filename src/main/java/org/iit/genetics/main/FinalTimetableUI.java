@@ -28,8 +28,6 @@ class FinalTimetableUI {
     private static final String HTML = "<html>";
     private static final String HTML_END = "</html>";
     private static final String H_LINE = "<hr/>";
-    private static final int COLUMNS = 6;
-    private static final int ROWS = 4;
 
     private JPanel mainPanel;
     private JTable finalTimetable;
@@ -40,9 +38,9 @@ class FinalTimetableUI {
 
     void generateTimetableData(List<ScheduledClass> scheduledClasses) {
         DefaultTableModel tableModel = new DefaultTableModel(CommonConstants.TIMETABLE_HEADER, 0);
-        StringBuilder[][] classData = new StringBuilder[ROWS][COLUMNS];
+        StringBuilder[][] classData = new StringBuilder[CommonConstants.NUMBER_OF_SLOTS_PER_DAY][CommonConstants.TABLE_COLUMNS];
 
-        for (int i = 0; i < ROWS; ++i) {
+        for (int i = 0; i < CommonConstants.NUMBER_OF_SLOTS_PER_DAY; ++i) {
             classData[i][0] = new StringBuilder(SlotIndex.findByKey(i + 1).getTime());
         }
 
@@ -64,12 +62,14 @@ class FinalTimetableUI {
                 classData[row][col] = sb.append(HTML_END);
             } else {
                 int endTag = existing.indexOf(HTML_END);
-                existing.delete(endTag, endTag + HTML_END.length());
-                existing.append(H_LINE).append(sb).append(HTML);
+                if (endTag != -1) {
+                    existing.delete(endTag, endTag + HTML_END.length());
+                    existing.append(H_LINE).append(sb).append(HTML);
+                }
             }
         }));
 
-        for (int row = 0; row < ROWS; ++row) {
+        for (int row = 0; row < CommonConstants.NUMBER_OF_SLOTS_PER_DAY; ++row) {
             tableModel.addRow(classData[row]);
         }
 

@@ -31,7 +31,7 @@ public class Algorithm {
         clone.createClasses(individual);
 
         // Calculate fitness
-        int clashes = clone.calcClashes();
+        int clashes = clone.calculateBlockers();
         double fitness = 1 / (double) (clashes + 1);
         individual.setFitness(fitness);
         return fitness;
@@ -55,7 +55,6 @@ public class Algorithm {
     }
 
     private boolean isTerminationConditionMet(int generationsCount, int maxGenerations) {
-        log.warn("Max generations limit reached..!!");
         return (generationsCount > maxGenerations);
     }
 
@@ -152,7 +151,7 @@ public class Algorithm {
         timetable.createClasses(population.getFittest(0));
         log.info("Solution found in " + generation + " generations.");
         log.info("Final solution fitness: " + population.getFittest(0).getFitness());
-        log.info("Clashes: " + timetable.calcClashes());
+        log.info("Clashes: " + timetable.calculateBlockers());
 
         return timetable;
     }

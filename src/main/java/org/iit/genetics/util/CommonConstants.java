@@ -15,4 +15,8 @@ public class CommonConstants {
     public static final String APP_UI_HEADING = "Class Scheduler - v1.0.0";
 
     public static final String TIMETABLE_UI_HEADING = "Scheduled Timetable";
+
+    public static final int TABLE_COLUMNS = 6;
+
+    public static final int NUMBER_OF_SLOTS_PER_DAY = 4;
 }

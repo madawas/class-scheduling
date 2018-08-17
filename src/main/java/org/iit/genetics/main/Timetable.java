@@ -7,23 +7,28 @@ import org.iit.genetics.bean.Professor;
 import org.iit.genetics.bean.ScheduledClass;
 import org.iit.genetics.bean.StudentGroup;
 import org.iit.genetics.bean.TimeSlot;
+import org.iit.genetics.configuration.AppConfig;
 import org.iit.genetics.configuration.AppData;
+import org.iit.genetics.util.Util;
 
 import java.util.List;
 
 public class Timetable {
     private AppData appData;
+    private AppConfig appConfig;
     private ScheduledClass[] scheduledClasses;
     private List<TimeSlot> timeSlots;
     private int classesToSchedule = 0;
 
-    public Timetable(AppData appData) {
+    public Timetable(AppData appData, AppConfig appConfig) {
         this.appData = appData;
+        this.appConfig = appConfig;
     }
 
     public Timetable(Timetable cloneable) {
         this.appData = cloneable.getAppData();
         this.timeSlots = cloneable.getTimeSlots();
+        this.appConfig = cloneable.getAppConfig();
     }
 
     public void createClasses(Individual individual) {
@@ -93,38 +98,43 @@ public class Timetable {
         return this.classesToSchedule;
     }
 
-    public int calcClashes() {
-        int clashes = 0;
-        for (ScheduledClass scheduledClassA : this.scheduledClasses) {
-            // Check room capacity
-            int roomCapacity = scheduledClassA.getClassroom().getCapacity();
-            int groupSize = scheduledClassA.getStudentGroup().getSize();
-            if (roomCapacity < groupSize) {
-                clashes++;
-            }
+    public int calculateBlockers() {
+        int blockers = 0;
+//        for (ScheduledClass scheduledClassA : this.scheduledClasses) {
+//            // Check room capacity
+//            int roomCapacity = scheduledClassA.getClassroom().getCapacity();
+//            int groupSize = scheduledClassA.getStudentGroup().getSize();
+//            if (roomCapacity < groupSize) {
+//                clashes++;
+//            }
+//
+//            // Check if room is taken
+//            for (ScheduledClass scheduledClassB : this.scheduledClasses) {
+//                if (scheduledClassA.getClassroom() == scheduledClassB.getClassroom()
+//                        && scheduledClassA.getTimeSlot() == scheduledClassB.
+//                        getTimeSlot() && scheduledClassA.getId() != scheduledClassB.getId()) {
+//                    clashes++;
+//                    break;
+//                }
+//            }
+//
+//            // Check if professor is available
+//            for (ScheduledClass scheduledClassB : this.scheduledClasses) {
+//                if (scheduledClassA.getProfessor() == scheduledClassB.
+//                        getProfessor() && scheduledClassA.getTimeSlot() == scheduledClassB.getTimeSlot()
+//                        && scheduledClassA.getId() != scheduledClassB.getId()) {
+//                    clashes++;
+//                    break;
+//                }
+//            }
+//        }
 
-            // Check if room is taken
-            for (ScheduledClass scheduledClassB : this.scheduledClasses) {
-                if (scheduledClassA.getClassroom() == scheduledClassB.getClassroom()
-                        && scheduledClassA.getTimeSlot() == scheduledClassB.
-                        getTimeSlot() && scheduledClassA.getId() != scheduledClassB.getId()) {
-                    clashes++;
-                    break;
-                }
-            }
+        blockers += Util.calcRoomClashes(this.scheduledClasses);
+        blockers += Util.calcRoomCapacityMismatches(this.scheduledClasses);
+        blockers += Util.calcProfessorAvailability(this.scheduledClasses);
+        blockers += (int) Math.ceil(Util.calcFollowOn(this.scheduledClasses) / appConfig.getWeightFollowOnClasses());
 
-            // Check if professor is available
-            for (ScheduledClass scheduledClassB : this.scheduledClasses) {
-                if (scheduledClassA.getProfessor() == scheduledClassB.
-                        getProfessor() && scheduledClassA.getTimeSlot() == scheduledClassB.getTimeSlot()
-                        && scheduledClassA.getId() != scheduledClassB.getId()) {
-                    clashes++;
-                    break;
-                }
-            }
-        }
-
-        return clashes;
+        return blockers;
     }
 
     public AppData getAppData() {
@@ -137,5 +147,9 @@ public class Timetable {
 
     void setTimeSlots(List<TimeSlot> timeSlots) {
         this.timeSlots = timeSlots;
+    }
+
+    private AppConfig getAppConfig() {
+        return appConfig;
     }
 }

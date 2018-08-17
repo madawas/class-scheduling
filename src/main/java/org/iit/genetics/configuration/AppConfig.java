@@ -10,6 +10,7 @@ public class AppConfig {
     private Integer elitismCount;
     private Integer tournamentCount;
     private Integer maxGenerations;
+    private Integer weightFollowOnClasses;
 
     public Double getMutationRate() {
         return mutationRate;
@@ -57,5 +58,13 @@ public class AppConfig {
 
     public void setMaxGenerations(Integer maxGenerations) {
         this.maxGenerations = maxGenerations;
+    }
+
+    public Integer getWeightFollowOnClasses() {
+        return weightFollowOnClasses;
+    }
+
+    public void setWeightFollowOnClasses(Integer weightFollowOnClasses) {
+        this.weightFollowOnClasses = weightFollowOnClasses;
     }
 }

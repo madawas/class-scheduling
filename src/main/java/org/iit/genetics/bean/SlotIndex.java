@@ -9,6 +9,7 @@ public enum SlotIndex {
     private String time;
     private int slot;
     private static final Map<Integer, SlotIndex> map;
+    private static final Map<String, SlotIndex> map2;
 
     SlotIndex(int slot, String time) {
         this.slot = slot;
@@ -17,13 +18,19 @@ public enum SlotIndex {
 
     static {
         map = new HashMap<>();
+        map2 = new HashMap<>();
         for (SlotIndex index : SlotIndex.values()) {
             map.put(index.slot, index);
+            map2.put(index.time, index);
         }
     }
 
     public static SlotIndex findByKey(int i) {
         return map.get(i);
+    }
+
+    public static SlotIndex findByTime(String time) {
+        return map2.get(time);
     }
 
     public String getTime() {

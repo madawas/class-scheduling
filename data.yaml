@@ -16,12 +16,25 @@ classrooms:
 professors:
   - &professor1
     name: 'Dr. P Smith'
+    maxFollowOnClasses: -1
   - &professor2
     name: 'Mrs. E Mitchell'
+    maxFollowOnClasses: 0
   - &professor3
     name: 'Dr. R Williams'
+    maxFollowOnClasses: 0
+    unavailability:
+      WEDNESDAY:
+        - "10.00 - 12.00"
   - &professor4
     name: 'Mr. A Thompson'
+    maxFollowOnClasses: 2
+    unavailability:
+      MONDAY:
+        - "8.00 - 10.00"
+      FRIDAY:
+        - "13.00 - 15.00"
+        - "15.00 - 17.00"
 
 modules:
   - &module1

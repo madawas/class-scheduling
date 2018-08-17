@@ -1,5 +1,6 @@
 package org.iit.genetics.util;
 
+import org.iit.genetics.bean.Classroom;
 import org.iit.genetics.bean.Professor;
 import org.iit.genetics.bean.ScheduledClass;
 import org.iit.genetics.bean.SlotIndex;
@@ -13,20 +14,39 @@ import java.util.Map;
 public class Util {
 
     public static int calcRoomClashes(ScheduledClass[] scheduledClasses) {
-        int clashes = 0;
-        for (ScheduledClass scheduledClassA : scheduledClasses) {
+        int unavailability = 0;
+
+        for (ScheduledClass scheduledClass : scheduledClasses) {
+            TimeSlot timeSlot = scheduledClass.getTimeSlot();
+            Classroom classroom = scheduledClass.getClassroom();
+
+            if (classroom.getUnavailability() != null) {
+                for (Map.Entry<String, List<String>> entry : classroom.getUnavailability().entrySet()) {
+                    String key = entry.getKey();
+                    if (timeSlot.getWeekday().equals(Weekday.valueOf(key))) {
+                        for (String time : entry.getValue()) {
+                            if (timeSlot.getSlotIndex().equals(SlotIndex.findByTime(time))) {
+                                unavailability++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        for (ScheduledClass scheduledClass : scheduledClasses) {
             // Check if room is taken
             for (ScheduledClass scheduledClassB : scheduledClasses) {
-                if (scheduledClassA.getClassroom() == scheduledClassB.getClassroom()
-                        && scheduledClassA.getTimeSlot() == scheduledClassB.
-                        getTimeSlot() && scheduledClassA.getId() != scheduledClassB.getId()) {
-                    clashes++;
+                if (scheduledClass.getClassroom() == scheduledClassB.getClassroom()
+                        && scheduledClass.getTimeSlot() == scheduledClassB.
+                        getTimeSlot() && scheduledClass.getId() != scheduledClassB.getId()) {
+                    unavailability++;
                     break;
                 }
             }
         }
 
-        return clashes;
+        return unavailability;
     }
 
     public static int calcRoomCapacityMismatches(ScheduledClass[] scheduledClasses) {

@@ -100,34 +100,6 @@ public class Timetable {
 
     public int calculateBlockers() {
         int blockers = 0;
-//        for (ScheduledClass scheduledClassA : this.scheduledClasses) {
-//            // Check room capacity
-//            int roomCapacity = scheduledClassA.getClassroom().getCapacity();
-//            int groupSize = scheduledClassA.getStudentGroup().getSize();
-//            if (roomCapacity < groupSize) {
-//                clashes++;
-//            }
-//
-//            // Check if room is taken
-//            for (ScheduledClass scheduledClassB : this.scheduledClasses) {
-//                if (scheduledClassA.getClassroom() == scheduledClassB.getClassroom()
-//                        && scheduledClassA.getTimeSlot() == scheduledClassB.
-//                        getTimeSlot() && scheduledClassA.getId() != scheduledClassB.getId()) {
-//                    clashes++;
-//                    break;
-//                }
-//            }
-//
-//            // Check if professor is available
-//            for (ScheduledClass scheduledClassB : this.scheduledClasses) {
-//                if (scheduledClassA.getProfessor() == scheduledClassB.
-//                        getProfessor() && scheduledClassA.getTimeSlot() == scheduledClassB.getTimeSlot()
-//                        && scheduledClassA.getId() != scheduledClassB.getId()) {
-//                    clashes++;
-//                    break;
-//                }
-//            }
-//        }
 
         blockers += Util.calcRoomClashes(this.scheduledClasses);
         blockers += Util.calcRoomCapacityMismatches(this.scheduledClasses);

@@ -1,5 +1,8 @@
 package org.iit.genetics.bean;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * The class {@link Classroom} represents a class room which is identified by a room number and has a capacity
  */
@@ -7,6 +10,7 @@ public class Classroom {
     private int id;
     private String number;
     private int capacity;
+    private Map<String, List<String>> unavailability;
 
     public Classroom() {
 
@@ -40,5 +44,13 @@ public class Classroom {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    public Map<String, List<String>> getUnavailability() {
+        return unavailability;
+    }
+
+    public void setUnavailability(Map<String, List<String>> unavailability) {
+        this.unavailability = unavailability;
     }
 }

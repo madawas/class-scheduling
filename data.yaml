@@ -3,12 +3,19 @@ classrooms:
   -
     number: "A1"
     capacity: 15
+    unavailability:
+      FRIDAY:
+        - "13.00 - 15.00"
+        - "15.00 - 17.00"
   -
     number: "B1"
     capacity: 30
   -
     number: "D1"
     capacity: 20
+    unavailability:
+      MONDAY:
+        - "8.00 - 10.00"
   -
     number: "F1"
     capacity: 25

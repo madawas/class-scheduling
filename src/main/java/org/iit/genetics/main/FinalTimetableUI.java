@@ -86,7 +86,7 @@ class FinalTimetableUI {
         frameContentPane.add(mainPanel, BorderLayout.CENTER);
         frame.pack();
         frame.setLocationRelativeTo(frame.getOwner());
-
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setVisible(true);
 
     }

@@ -78,7 +78,7 @@ public class ClassSchedulerUI {
      * Initiate components
      */
     private void initComponents() {
-        frame = new JFrame("Class Scheduler - v1.0.0");
+        frame = new JFrame(CommonConstants.APP_UI_HEADING);
         mainPanel = new JPanel();
         consolePanel = new JPanel();
         textAreaScrollPane = new JScrollPane();

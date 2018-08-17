@@ -20,40 +20,42 @@ public class Algorithm {
         this.tournamentSize = tournamentSize;
     }
 
-    public Population initPopulation(Timetable timetable) {
+    private Population initPopulation(Timetable timetable) {
         return new Population(this.populationSize, timetable);
     }
 
     private double calcFitness(Individual individual, Timetable timetable) {
 
         // Create new timetable object to use -- cloned from an existing timetable
-        Timetable threadTimetable = new Timetable(timetable);
-        threadTimetable.createClasses(individual);
+        Timetable clone = new Timetable(timetable);
+        clone.createClasses(individual);
 
         // Calculate fitness
-        int clashes = threadTimetable.calcClashes();
+        int clashes = clone.calcClashes();
         double fitness = 1 / (double) (clashes + 1);
         individual.setFitness(fitness);
         return fitness;
     }
 
-    public void evalPopulation(Population population, Timetable timetable) {
+    private void evalPopulation(Population population, Timetable timetable) {
         double populationFitness = 0;
 
-        // Loop over population evaluating individuals and summing population
-        // fitness
+        // Loop over population evaluating individuals and summing population fitness
         for (Individual individual : population.getIndividuals()) {
             populationFitness += this.calcFitness(individual, timetable);
         }
+        log.info("Population fitness: " +  populationFitness);
+        log.info("Fittest: " + population.getFittest(0).getFitness());
 
         population.setPopulationFitness(populationFitness);
     }
 
-    public boolean isTerminationConditionMet(Population population) {
+    private boolean isTerminationConditionMet(Population population) {
         return population.getFittest(0).getFitness() == 1.0;
     }
 
-    public boolean isTerminationConditionMet(int generationsCount, int maxGenerations) {
+    private boolean isTerminationConditionMet(int generationsCount, int maxGenerations) {
+        log.warn("Max generations limit reached..!!");
         return (generationsCount > maxGenerations);
     }
 
@@ -72,7 +74,7 @@ public class Algorithm {
         return tournament.getFittest(0);
     }
 
-    public Population crossoverPopulation(Population population) {
+    private Population crossoverPopulation(Population population) {
         // Create new population
         Population newPopulation = new Population(population.size());
 
@@ -83,14 +85,12 @@ public class Algorithm {
             // Apply crossover to this individual?
             if (this.crossoverRate > Math.random() && populationIndex > this.elitismCount) {
                 // Initialize offspring
-                Individual offspring = new Individual(parent1.
-                        getChromosomeLength());
+                Individual offspring = new Individual(parent1.getChromosomeLength());
 
                 // Find second parent
                 Individual parent2 = selectParent(population);
                 // Loop over genome
-                for (int geneIndex = 0; geneIndex < parent1.
-                        getChromosomeLength(); geneIndex++) {
+                for (int geneIndex = 0; geneIndex < parent1.getChromosomeLength(); geneIndex++) {
                     // Use half of parent1's genes and half of parent2's genes
                     if (0.5 > Math.random()) {
                         offspring.setGene(geneIndex, parent1.getGene(geneIndex));
@@ -98,7 +98,6 @@ public class Algorithm {
                         offspring.setGene(geneIndex, parent2.getGene(geneIndex));
                     }
                 }
-
                 // Add offspring to new population
                 newPopulation.setIndividual(populationIndex, offspring);
             } else {
@@ -110,7 +109,7 @@ public class Algorithm {
         return newPopulation;
     }
 
-    public Population mutatePopulation(Population population, Timetable timetable) {
+    private Population mutatePopulation(Population population, Timetable timetable) {
         // Initialize new population
         Population newPopulation = new Population(this.populationSize);
 
@@ -123,55 +122,35 @@ public class Algorithm {
             Individual randomIndividual = new Individual(timetable);
 
             // Loop over individual's genes
-            for (int geneIndex = 0; geneIndex < individual.
-                    getChromosomeLength(); geneIndex++) {
+            for (int geneIndex = 0; geneIndex < individual.getChromosomeLength(); geneIndex++) {
                 // Skip mutation if this is an elite individual
                 if (populationIndex > this.elitismCount) {
-                    // Does this gene need mutation?
                     if (this.mutationRate > Math.random()) {
-                        // Swap for new gene
                         individual.setGene(geneIndex, randomIndividual.getGene(geneIndex));
                     }
                 }
             }
-
-            // Add individual to population
             newPopulation.setIndividual(populationIndex, individual);
         }
-
-        // Return mutated population
         return newPopulation;
     }
 
     public Timetable runGA(Timetable timetable, int maxGenerations) {
         Population population = this.initPopulation(timetable);
-
         this.evalPopulation(population, timetable);
-
-        // Keep track of current generation
         int generation = 1;
 
-        // Start evolution loop
         while (!this.isTerminationConditionMet(generation, maxGenerations) && !this
                 .isTerminationConditionMet(population)) {
-            // Print fitness
             log.info("Generation: " + generation + ", Best fitness: " + population.getFittest(0).getFitness());
-
-            // Apply crossover
             population = this.crossoverPopulation(population);
-
-            // Apply mutation
             population = this.mutatePopulation(population, timetable);
-
-            // Evaluate population
             this.evalPopulation(population, timetable);
-
-            // Increment the current generation
             generation++;
         }
 
         timetable.createClasses(population.getFittest(0));
-        log.info("Solution found in " + generation + " generations");
+        log.info("Solution found in " + generation + " generations.");
         log.info("Final solution fitness: " + population.getFittest(0).getFitness());
         log.info("Clashes: " + timetable.calcClashes());
 

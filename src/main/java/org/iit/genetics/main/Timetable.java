@@ -28,7 +28,7 @@ public class Timetable {
 
     public void createClasses(Individual individual) {
         // Init scheduledClasses
-        ScheduledClass[] scheduledClasses = new ScheduledClass[this.getClassesToSchedule()];
+        this.scheduledClasses = new ScheduledClass[this.getClassesToSchedule()];
         // Get individual's chromosome
         int[] chromosome = individual.getChromosome();
         int chromosomePos = 0;
@@ -37,27 +37,26 @@ public class Timetable {
         for (StudentGroup studentGroup : this.appData.getStudentGroups()) {
             List<Module> modules = studentGroup.getEnrollments();
             for (Module module : modules) {
-                scheduledClasses[classIndex] = new ScheduledClass(classIndex, studentGroup, module);
+                this.scheduledClasses[classIndex] = new ScheduledClass(classIndex, studentGroup, module);
 
                 // Add timeSlot
-                scheduledClasses[classIndex].setTimeSlot(getTimeSlotById(chromosome[chromosomePos]));
+                this.scheduledClasses[classIndex].setTimeSlot(getTimeSlotById(chromosome[chromosomePos]));
                 chromosomePos++;
 
                 // Add room
-                scheduledClasses[classIndex].setClassroom(getClassroom(chromosome[chromosomePos]));
+                this.scheduledClasses[classIndex].setClassroom(getClassroom(chromosome[chromosomePos]));
                 chromosomePos++;
 
                 // Add professor
-                scheduledClasses[classIndex].setProfessor(getProfessor(chromosome[chromosomePos]));
+                this.scheduledClasses[classIndex].setProfessor(getProfessor(chromosome[chromosomePos]));
                 chromosomePos++;
 
                 classIndex++;
             }
         }
-        this.scheduledClasses = scheduledClasses;
     }
 
-    public Classroom getClassroom(int id) {
+    private Classroom getClassroom(int id) {
         return this.appData.getClassrooms().stream().filter(classroom -> classroom.getId() == id).findFirst()
                 .orElse(null);
     }
@@ -67,12 +66,12 @@ public class Timetable {
         return this.appData.getClassrooms().get(index);
     }
 
-    public Professor getProfessor(int id) {
+    private Professor getProfessor(int id) {
         return this.appData.getProfessors().stream().filter(professor -> professor.getId() == id).findFirst()
                 .orElse(null);
     }
 
-    public TimeSlot getTimeSlotById(int id) {
+    private TimeSlot getTimeSlotById(int id) {
         return this.timeSlots.stream().filter(timeSlot -> timeSlot.getId() == id).findFirst().orElse(null);
     }
 
@@ -81,7 +80,7 @@ public class Timetable {
         return timeSlots.get(index);
     }
 
-    public ScheduledClass[] getScheduledClasses() {
+    ScheduledClass[] getScheduledClasses() {
         return this.scheduledClasses;
     }
 
@@ -132,11 +131,11 @@ public class Timetable {
         return appData;
     }
 
-    public List<TimeSlot> getTimeSlots() {
+    private List<TimeSlot> getTimeSlots() {
         return timeSlots;
     }
 
-    public void setTimeSlots(List<TimeSlot> timeSlots) {
+    void setTimeSlots(List<TimeSlot> timeSlots) {
         this.timeSlots = timeSlots;
     }
 }

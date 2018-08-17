@@ -27,7 +27,7 @@ public class Population {
         return this.population;
     }
 
-    public Individual getFittest(int offset) {
+    Individual getFittest(int offset) {
         this.population.sort((i1, i2) -> Double.compare(i2.getFitness(), i1.getFitness()));
         return this.population.get(offset);
     }

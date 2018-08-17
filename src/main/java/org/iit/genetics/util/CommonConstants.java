@@ -11,4 +11,8 @@ public class CommonConstants {
     public static final String[] TIMETABLE_HEADER = {"TIME", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"};
 
     public static final Integer TABLE_ROW_HEIGHT = 250;
+
+    public static final String APP_UI_HEADING = "Class Scheduler - v1.0.0";
+
+    public static final String TIMETABLE_UI_HEADING = "Scheduled Timetable";
 }

@@ -20,7 +20,7 @@ import javax.swing.JTable;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
-public class FinalTimetableUI {
+class FinalTimetableUI {
     private static final String NEW_LINE = "<br/>";
     private static final String MODULE = "Module: ";
     private static final String PROFESSOR = "Professor: ";
@@ -77,7 +77,7 @@ public class FinalTimetableUI {
     }
 
     void displayTimetable() {
-        JFrame frame = new JFrame("Final Timetable");
+        JFrame frame = new JFrame(CommonConstants.TIMETABLE_UI_HEADING);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setAlwaysOnTop(false);
 

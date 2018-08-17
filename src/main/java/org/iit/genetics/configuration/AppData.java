@@ -45,7 +45,7 @@ public class AppData {
         this.studentGroups = studentGroups;
     }
 
-    public void setResourceIds() {
+    void setResourceIds() {
         int id = 1;
         for (Classroom classroom : this.classrooms) {
             classroom.setId(id);

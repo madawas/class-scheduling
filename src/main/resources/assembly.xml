@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.3"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.3 http://maven.apache.org/xsd/assembly-1.1.3.xsd">
+    <id>class-scheduling</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <dependencySets>
+        <dependencySet>
+            <useProjectArtifact>false</useProjectArtifact>
+            <outputDirectory>lib</outputDirectory>
+            <unpack>false</unpack>
+        </dependencySet>
+    </dependencySets>
+    <fileSets>
+        <fileSet>
+            <directory>${project.build.directory}</directory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+            <outputDirectory>/</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${project.build.directory}/conf</directory>
+            <outputDirectory>/</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${project.build.directory}/data</directory>
+            <outputDirectory>/</outputDirectory>
+        </fileSet>
+    </fileSets>
+
+    <files>
+        <file>
+            <source>app_config.yaml</source>
+            <outputDirectory>conf/</outputDirectory>
+            <fileMode>0644</fileMode>
+        </file>
+        <file>
+            <source>data.yaml</source>
+            <outputDirectory>data/</outputDirectory>
+            <fileMode>0644</fileMode>
+        </file>
+        <file>
+            <source>src/main/resources/log4j.properties</source>
+            <outputDirectory>conf/</outputDirectory>
+            <fileMode>0644</fileMode>
+        </file>
+    </files>
+</assembly>

@@ -14,7 +14,7 @@
 > mvn clean install   
 ```
 
-* Navigate to target and unzip ${project.name}-${project.version}.zip
+* Navigate to target and unzip `${project.name}-${project.version}.zip`
 
 ```
 > unzip ${project.name}-${project.version}.zip  

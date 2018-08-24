@@ -1,5 +1,6 @@
 package org.iit.genetics.main;
 
+import org.apache.log4j.Logger;
 import org.iit.genetics.algorithm.Individual;
 import org.iit.genetics.bean.Classroom;
 import org.iit.genetics.bean.Module;
@@ -14,6 +15,7 @@ import org.iit.genetics.util.Util;
 import java.util.List;
 
 public class Timetable {
+    private static final Logger log = Logger.getLogger(Timetable.class);
     private AppData appData;
     private AppConfig appConfig;
     private ScheduledClass[] scheduledClasses;
@@ -102,9 +104,21 @@ public class Timetable {
         int blockers = 0;
 
         blockers += Util.calcRoomClashes(this.scheduledClasses);
+        if (log.isDebugEnabled()) {
+            log.debug("Room Clashes: " + Util.calcRoomClashes(scheduledClasses));
+        }
         blockers += Util.calcRoomCapacityMismatches(this.scheduledClasses);
+        if (log.isDebugEnabled()) {
+            log.debug("Room Capacity Clashes: " + Util.calcRoomClashes(this.scheduledClasses));
+        }
         blockers += Util.calcProfessorAvailability(this.scheduledClasses);
+        if (log.isDebugEnabled()) {
+            log.debug("Professor Unavailability Clashes: " + Util.calcProfessorAvailability(this.scheduledClasses));
+        }
         blockers += (int) Math.ceil(Util.calcFollowOn(this.scheduledClasses) / appConfig.getWeightFollowOnClasses());
+        if (log.isDebugEnabled()) {
+            log.debug("Follow On Classes Clashes: " + Util.calcFollowOn(this.scheduledClasses));
+        }
 
         return blockers;
     }

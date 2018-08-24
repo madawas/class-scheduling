@@ -25,13 +25,12 @@ public class Algorithm {
     }
 
     private double calcFitness(Individual individual, Timetable timetable) {
-
-        // Create new timetable object to use -- cloned from an existing timetable
         Timetable clone = new Timetable(timetable);
         clone.createClasses(individual);
 
         // Calculate fitness
         int clashes = clone.calculateBlockers();
+        log.info("Class clashes/blockers: " + clashes);
         double fitness = 1 / (double) (clashes + 1);
         individual.setFitness(fitness);
         return fitness;
@@ -78,10 +77,10 @@ public class Algorithm {
         Population newPopulation = new Population(population.size());
 
         // Loop over current population by fitness
-        for (int populationIndex = 0; populationIndex < population.size(); populationIndex++) {
+        for (int populationIndex = 0; populationIndex < population.size(); ++populationIndex) {
             Individual parent1 = population.getFittest(populationIndex);
 
-            // Apply crossover to this individual?
+            // Decision - Apply crossover to this individual
             if (this.crossoverRate > Math.random() && populationIndex > this.elitismCount) {
                 // Initialize offspring
                 Individual offspring = new Individual(parent1.getChromosomeLength());

@@ -38,7 +38,6 @@ public class ClassSchedulerUI {
     private JPanel mainPanel;
     private JPanel consolePanel;
     private JTextArea console;
-    private JButton configureButton;
     private JButton scheduleClassesButton;
     private JButton viewTimetableButton;
     private JScrollPane textAreaScrollPane;
@@ -52,10 +51,6 @@ public class ClassSchedulerUI {
         initComponents();
         this.appConfig = ConfigurationManager.getAppConfiguration(CommonConstants.DEFAULT_CONFIG_PATH);
         this.appData = ConfigurationManager.getAppData(CommonConstants.DEFAULT_DATA_PATH);
-    }
-
-    private void configureButtonActionPerformed(ActionEvent e) {
-
     }
 
     private void scheduleClassesButtonActionPerformed(ActionEvent e) {
@@ -84,7 +79,6 @@ public class ClassSchedulerUI {
         textAreaScrollPane = new JScrollPane();
         console = new JTextArea();
         buttonsPanel = new JPanel();
-        configureButton = new JButton();
         scheduleClassesButton = new JButton();
         viewTimetableButton = new JButton();
         final Spacer spacer1 = new Spacer();
@@ -96,8 +90,6 @@ public class ClassSchedulerUI {
         consolePanel.setLayout(new GridLayoutManager(1, 4, new Insets(0, 0, 0, 0), -1, -1));
         buttonsPanel.setLayout(new GridLayoutManager(1, 4, new Insets(0, 0, 10, 10), -1, -1));
 
-        configureButton.setText("Configure");
-        configureButton.addActionListener(this::configureButtonActionPerformed);
         scheduleClassesButton.setText("Schedule Classes");
         scheduleClassesButton.addActionListener(this::scheduleClassesButtonActionPerformed);
         viewTimetableButton.setText("View Timetable");
@@ -106,10 +98,6 @@ public class ClassSchedulerUI {
 
         buttonsPanel.add(scheduleClassesButton,
                 new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL,
-                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
-                        GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        buttonsPanel.add(configureButton,
-                new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL,
                         GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
                         GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         buttonsPanel.add(viewTimetableButton,

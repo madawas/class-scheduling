@@ -2,9 +2,10 @@ package org.iit.genetics.algorithm;
 
 import org.iit.genetics.bean.StudentGroup;
 import org.iit.genetics.bean.Module;
+import org.iit.genetics.main.ClassSchedulerUI;
 import org.iit.genetics.main.Timetable;
 
-public class Individual {
+public class Individual extends ClassSchedulerUI {
     private int[] chromosome;
     private double fitness = -1;
 

@@ -169,8 +169,8 @@ public class ClassSchedulerUI {
     public static void main(String[] args) {
         String log4jConfPath = CommonConstants.DEFAULT_LOG_PROPERTY_PATH;
         PropertyConfigurator.configure(log4jConfPath);
-        ClassSchedulerUI classSchedulerUI = new ClassSchedulerUI();
 
+        ClassSchedulerUI classSchedulerUI = new ClassSchedulerUI();
         classSchedulerUI.frame.setVisible(true);
     }
 }

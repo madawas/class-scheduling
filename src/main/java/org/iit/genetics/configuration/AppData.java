@@ -54,14 +54,14 @@ public class AppData {
 
         id = 1;
 
-        for (Professor professor: this.professors) {
+        for (Professor professor : this.professors) {
             professor.setId(id);
             ++id;
         }
 
         id = 1;
 
-        for (Module module: this.modules) {
+        for (Module module : this.modules) {
             module.setId(id);
             ++id;
         }

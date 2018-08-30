@@ -113,8 +113,7 @@ public class Algorithm {
 
         // Loop over current population by fitness
         for (int populationIndex = 0; populationIndex < population.size(); populationIndex++) {
-            Individual individual = population.
-                    getFittest(populationIndex);
+            Individual individual = population.getFittest(populationIndex);
 
             // Create random individual to swap genes with
             Individual randomIndividual = new Individual(timetable);

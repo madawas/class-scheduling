@@ -4,7 +4,7 @@
 
 * Clone the source code.
 ```
-> git clone https://madawas@bitbucket.org/madawas/class-scheduling.git
+> git clone https://github.com/madawas/class-scheduling.git
 ```
 
 *  Navigate to the project root and build the project.

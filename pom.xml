@@ -4,7 +4,7 @@
 
     <groupId>org.madawa.genetics</groupId>
     <artifactId>class-scheduling</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -38,7 +38,7 @@
     <scm>
         <connection>scm:git:git@github.com:madawas/class-scheduling.git</connection>
         <url>git@github.com:madawas/class-scheduling.git</url>
-        <tag>v1.0.0</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <build>

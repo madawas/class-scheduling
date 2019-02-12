@@ -1,13 +1,28 @@
-package org.iit.genetics.main;
+/*
+ * Copyright (c) 2019 Madawa Soysa
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.madawa.genetics.main;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
-import org.iit.genetics.bean.ScheduledClass;
-import org.iit.genetics.bean.SlotIndex;
-import org.iit.genetics.util.CommonConstants;
+import org.madawa.genetics.bean.ScheduledClass;
+import org.madawa.genetics.bean.SlotIndex;
+import org.madawa.genetics.util.CommonConstants;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Container;
 import java.awt.Insets;
 import java.util.List;

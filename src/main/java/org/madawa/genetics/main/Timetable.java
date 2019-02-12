@@ -1,16 +1,32 @@
-package org.iit.genetics.main;
+/*
+ * Copyright (c) 2019 Madawa Soysa
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.madawa.genetics.main;
 
 import org.apache.log4j.Logger;
-import org.iit.genetics.algorithm.Individual;
-import org.iit.genetics.bean.Classroom;
-import org.iit.genetics.bean.Module;
-import org.iit.genetics.bean.Professor;
-import org.iit.genetics.bean.ScheduledClass;
-import org.iit.genetics.bean.StudentGroup;
-import org.iit.genetics.bean.TimeSlot;
-import org.iit.genetics.configuration.AppConfig;
-import org.iit.genetics.configuration.AppData;
-import org.iit.genetics.util.Util;
+import org.madawa.genetics.bean.Classroom;
+import org.madawa.genetics.bean.Professor;
+import org.madawa.genetics.bean.ScheduledClass;
+import org.madawa.genetics.bean.StudentGroup;
+import org.madawa.genetics.bean.TimeSlot;
+import org.madawa.genetics.util.Util;
+import org.madawa.genetics.algorithm.Individual;
+import org.madawa.genetics.bean.Module;
+import org.madawa.genetics.configuration.AppConfig;
+import org.madawa.genetics.configuration.AppData;
 
 import java.util.List;
 

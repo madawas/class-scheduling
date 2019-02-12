@@ -6,7 +6,7 @@
 
     <groupId>org.iit.genetics</groupId>
     <artifactId>class-scheduling</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -36,6 +36,12 @@
             <version>7.0.3</version>
         </dependency>
     </dependencies>
+
+    <scm>
+        <connection>scm:git:git@github.com:madawas/class-scheduling.git</connection>
+        <url>git@github.com:madawas/class-scheduling.git</url>
+        <tag>HEAD</tag>
+    </scm>
 
     <build>
         <resources>
@@ -84,9 +90,17 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>org.iit.genetics.main.ClassSchedulerUI</mainClass>
+                            <mainClass>org.madawa.genetics.main.ClassSchedulerUI</mainClass>
                         </manifest>
                     </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.3</version>
+                <configuration>
+                    <goals>clean install</goals>
                 </configuration>
             </plugin>
         </plugins>

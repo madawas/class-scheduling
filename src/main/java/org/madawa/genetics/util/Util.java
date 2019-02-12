@@ -1,11 +1,27 @@
-package org.iit.genetics.util;
+/*
+ * Copyright (c) 2019 Madawa Soysa
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-import org.iit.genetics.bean.Classroom;
-import org.iit.genetics.bean.Professor;
-import org.iit.genetics.bean.ScheduledClass;
-import org.iit.genetics.bean.SlotIndex;
-import org.iit.genetics.bean.TimeSlot;
-import org.iit.genetics.bean.Weekday;
+package org.madawa.genetics.util;
+
+import org.madawa.genetics.bean.Classroom;
+import org.madawa.genetics.bean.Professor;
+import org.madawa.genetics.bean.ScheduledClass;
+import org.madawa.genetics.bean.SlotIndex;
+import org.madawa.genetics.bean.TimeSlot;
+import org.madawa.genetics.bean.Weekday;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,6 @@
 # Scheduling Classes Using Genetic Algorithms
 
-### Running the Application
+### Building from Source
 
 * Clone the source code.
 ```
